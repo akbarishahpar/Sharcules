@@ -13,24 +13,18 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-import Playground from "./base/playground";
-import Brick from "./daemons/brick";
-import Shark from "./daemons/shark";
-var Startup = /** @class */ (function (_super) {
-    __extends(Startup, _super);
-    function Startup() {
+import Daemon from "../base/contracts/daemon";
+var Brick = /** @class */ (function (_super) {
+    __extends(Brick, _super);
+    function Brick() {
         var _this = _super.call(this) || this;
-        _this.ConfigureTextures = function () {
-            _this.RegisterTexture("/assets/shark-128px.png");
-            _this.RegisterTexture("/assets/brick-128px.png");
-            _this.RegisterTexture("/assets/fish00-128px.png");
-        };
-        _this.OnTexturesLoad = function () {
-            _this.DaemonFactory.Create(Shark);
-            _this.DaemonFactory.Create(Brick);
+        _this.Url = "/assets/brick-128px.png";
+        _this.OnCreate = function () {
+            _this.ResolveSprite().width = 64;
+            _this.ResolveSprite().height = 50;
         };
         return _this;
     }
-    return Startup;
-}(Playground));
-export default Startup;
+    return Brick;
+}(Daemon));
+export default Brick;

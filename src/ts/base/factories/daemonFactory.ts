@@ -20,6 +20,7 @@ class DaemonFactory {
       this.playground.Mouse.Subscribe("mousemove", daemon.OnMouseMove);
     if (daemon.OnMouseClick !== undefined)
       this.playground.Mouse.Subscribe("click", daemon.OnMouseClick);
+    if (daemon.OnCreate !== undefined) daemon.OnCreate();
     return daemon;
   }
 }

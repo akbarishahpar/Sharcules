@@ -9,6 +9,7 @@ abstract class Daemon {
   OnKeyUp?: (e: KeyboardEvent) => void;
   OnMouseMove?: (e: MouseEvent) => void;
   OnMouseClick?: (e: MouseEvent) => void;
+  OnCreate?: () => void;
   OnCollide?: () => void;
   ResolveSprite = (): Sprite => <Sprite>this.Sprite;
   ResolveDameonFactory = () => <DaemonFactory>this.DaemonFactory;
