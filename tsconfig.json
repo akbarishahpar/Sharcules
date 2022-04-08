@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "outDir": "./src/js",
+    "rootDir": "./src/ts",
+    "target": "es5",
+    "module": "ES2020",
+    "strict": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "paths": {
+      "mini-signals": [
+        "./node_modules/resource-loader/typings/mini-signals.d.ts"
+      ]
+    },
+    "skipLibCheck": true,
+    "lib": ["DOM", "ES2020"]
+  }
+}
