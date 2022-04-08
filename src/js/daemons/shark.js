@@ -21,10 +21,20 @@ var Shark = /** @class */ (function (_super) {
         _this.Url = "/assets/shark-128px.png";
         _this.vx = 0;
         _this.vy = 0;
+        _this.tx = 0;
+        _this.ty = 0;
         _this.OnTick = function (delta) {
             var sprite = _this.ResolveSprite();
-            sprite.x += _this.vx;
-            sprite.y += _this.vy;
+            var dx = _this.tx - sprite.x;
+            var dy = _this.ty - sprite.y;
+            if (Math.abs(dx) > 25) {
+                _this.vx = dx / Math.max(Math.abs(dx), Math.abs(dy));
+                sprite.x += _this.vx * 5;
+            }
+            if (Math.abs(dy) > 25) {
+                sprite.y += _this.vy * 5;
+                _this.vy = dy / Math.max(Math.abs(dx), Math.abs(dy));
+            }
         };
         _this.OnKeyDown = function (e) {
             if (e.key === "ArrowUp")
@@ -45,6 +55,10 @@ var Shark = /** @class */ (function (_super) {
                 _this.vx = 0;
             if (e.key == "ArrowLeft")
                 _this.vx = 0;
+        };
+        _this.OnMouseMove = function (e) {
+            _this.tx = e.x;
+            _this.ty = e.y;
         };
         return _this;
     }

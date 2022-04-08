@@ -1,12 +1,14 @@
 import { Application, Loader } from "pixi.js";
 import DaemonFactory from "./daemonFactory";
 import Keyboard from "./keyboard";
+import Mouse from "./mouse";
 var Playground = /** @class */ (function () {
     function Playground() {
         var _this = this;
-        this.Keybarod = new Keyboard();
-        this.DaemonFactory = new DaemonFactory(this);
         this.App = new Application({ transparent: true });
+        this.Keybarod = new Keyboard();
+        this.Mouse = new Mouse(this.App.view);
+        this.DaemonFactory = new DaemonFactory(this);
         this.ResolveTexture = function (url) {
             return Loader.shared.resources[url].texture;
         };

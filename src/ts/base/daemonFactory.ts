@@ -1,7 +1,6 @@
 import { Sprite, Texture } from "pixi.js";
 import Daemon from "./daemon";
 import Playground from "./playground";
-
 class DaemonFactory {
   constructor(public playground: Playground) {}
   Create<Type extends Daemon>(type: { new (): Type }): Type {
@@ -17,8 +16,11 @@ class DaemonFactory {
       this.playground.Keybarod.Subscribe("keydown", daemon.OnKeyDown);
     if (daemon.OnKeyUp !== undefined)
       this.playground.Keybarod.Subscribe("keyup", daemon.OnKeyUp);
+    if (daemon.OnMouseMove !== undefined)
+      this.playground.Mouse.Subscribe("mousemove", daemon.OnMouseMove);
+    if (daemon.OnMouseClick !== undefined)
+      this.playground.Mouse.Subscribe("click", daemon.OnMouseClick);
     return daemon;
   }
 }
-
 export default DaemonFactory;

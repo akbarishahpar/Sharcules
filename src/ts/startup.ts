@@ -17,5 +17,4 @@ class Startup extends Playground {
     this.DaemonFactory.Create(Shark);
   };
 }
-
 export default Startup;

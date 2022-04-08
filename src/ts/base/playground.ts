@@ -1,10 +1,12 @@
 import { Application, Loader, LoaderResource, Sprite, Texture } from "pixi.js";
 import DaemonFactory from "./daemonFactory";
 import Keyboard from "./keyboard";
+import Mouse from "./mouse";
 abstract class Playground {
-  Keybarod: Keyboard = new Keyboard();
-  DaemonFactory: DaemonFactory = new DaemonFactory(this);
   App: Application = new Application({ transparent: true });
+  Keybarod: Keyboard = new Keyboard();
+  Mouse: Mouse = new Mouse(this.App.view);
+  DaemonFactory: DaemonFactory = new DaemonFactory(this);
   ResolveTexture = (url: string): Texture =>
     Loader.shared.resources[url].texture;
   RegisterTexture = (url: string): void => {
@@ -28,5 +30,4 @@ abstract class Playground {
     Loader.shared.load(this.OnTexturesLoad);
   };
 }
-
 export default Playground;

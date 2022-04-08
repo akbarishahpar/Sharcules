@@ -14,6 +14,10 @@ var DaemonFactory = /** @class */ (function () {
             this.playground.Keybarod.Subscribe("keydown", daemon.OnKeyDown);
         if (daemon.OnKeyUp !== undefined)
             this.playground.Keybarod.Subscribe("keyup", daemon.OnKeyUp);
+        if (daemon.OnMouseMove !== undefined)
+            this.playground.Mouse.Subscribe("mousemove", daemon.OnMouseMove);
+        if (daemon.OnMouseClick !== undefined)
+            this.playground.Mouse.Subscribe("click", daemon.OnMouseClick);
         return daemon;
     };
     return DaemonFactory;
