@@ -22,9 +22,6 @@ var Startup = /** @class */ (function (_super) {
         _this.ConfigureTextures = function () {
             _this.RegisterTexture("/assets/shark-128px.png");
         };
-        _this.OnTextureLoad = function (loader, resource) {
-            console.log(resource.url + " is loaded");
-        };
         _this.OnTexturesLoad = function () {
             _this.DaemonFactory.Create(Shark);
         };

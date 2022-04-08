@@ -13,7 +13,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-import Daemon from "../base/daemon";
+import Daemon from "../base/contracts/daemon";
 var Shark = /** @class */ (function (_super) {
     __extends(Shark, _super);
     function Shark() {
@@ -35,26 +35,6 @@ var Shark = /** @class */ (function (_super) {
                 sprite.y += _this.vy * 5;
                 _this.vy = dy / Math.max(Math.abs(dx), Math.abs(dy));
             }
-        };
-        _this.OnKeyDown = function (e) {
-            if (e.key === "ArrowUp")
-                _this.vy = -1;
-            if (e.key === "ArrowDown")
-                _this.vy = 1;
-            if (e.key == "ArrowRight")
-                _this.vx = 1;
-            if (e.key == "ArrowLeft")
-                _this.vx = -1;
-        };
-        _this.OnKeyUp = function (e) {
-            if (e.key === "ArrowUp")
-                _this.vy = 0;
-            if (e.key === "ArrowDown")
-                _this.vy = 0;
-            if (e.key == "ArrowRight")
-                _this.vx = 0;
-            if (e.key == "ArrowLeft")
-                _this.vx = 0;
         };
         _this.OnMouseMove = function (e) {
             _this.tx = e.x;

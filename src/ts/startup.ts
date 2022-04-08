@@ -7,12 +7,6 @@ class Startup extends Playground {
   override ConfigureTextures = () => {
     this.RegisterTexture("/assets/shark-128px.png");
   };
-  override OnTextureLoad = (
-    loader: PIXI.Loader,
-    resource: PIXI.LoaderResource
-  ) => {
-    console.log(`${resource.url} is loaded`);
-  };
   override OnTexturesLoad = () => {
     this.DaemonFactory.Create(Shark);
   };

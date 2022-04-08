@@ -1,6 +1,6 @@
 import { Sprite, Texture } from "pixi.js";
-import Daemon from "./daemon";
-import Playground from "./playground";
+import Daemon from "../contracts/daemon";
+import Playground from "../playground";
 class DaemonFactory {
   constructor(public playground: Playground) {}
   Create<Type extends Daemon>(type: { new (): Type }): Type {

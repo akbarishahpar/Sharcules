@@ -1,7 +1,7 @@
 import { Application, Loader, LoaderResource, Sprite, Texture } from "pixi.js";
-import DaemonFactory from "./daemonFactory";
-import Keyboard from "./keyboard";
-import Mouse from "./mouse";
+import DaemonFactory from "./factories/daemonFactory";
+import Keyboard from "./drivers/keyboard";
+import Mouse from "./drivers/mouse";
 abstract class Playground {
   App: Application = new Application({ transparent: true });
   Keybarod: Keyboard = new Keyboard();
