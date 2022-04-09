@@ -3,7 +3,7 @@ class Keyboard {
     window.addEventListener("keydown", (e) => this.onKeyDown(e), false);
     window.addEventListener("keyup", (e) => this.onKeyUp(e), false);
   }
-  Subscribe(event: string, handler: (e: KeyboardEvent) => void): void {
+  subscribe(event: string, handler: (e: KeyboardEvent) => void): void {
     if (event === "keydown") this.onKeyDownHandlers.push(handler);
     if (event === "keyup") this.onKeyUpHandlers.push(handler);
   }

@@ -3,7 +3,7 @@ class Mouse {
     canvas.addEventListener("mousemove", (e) => this.onMouseMove(e), false);
     canvas.addEventListener("click", (e) => this.onMouseClick(e), false);
   }
-  Subscribe(event: string, handler: (e: MouseEvent) => void): void {
+  subscribe(event: string, handler: (e: MouseEvent) => void): void {
     if (event === "mousemove") this.onMouseMoveHandlers.push(handler);
     if (event === "click") this.onMouseClickHandlers.push(handler);
   }

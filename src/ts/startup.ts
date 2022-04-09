@@ -1,18 +1,18 @@
-import Playground from "./base/playground";
+import Playground from "./playground";
 import Brick from "./daemons/brick";
 import Shark from "./daemons/shark";
 class Startup extends Playground {
   constructor() {
     super();
   }
-  override ConfigureTextures = () => {
-    this.RegisterTexture("/assets/shark-128px.png");
-    this.RegisterTexture("/assets/brick-128px.png");
-    this.RegisterTexture("/assets/fish00-128px.png");
+  override configureTextures = () => {
+    this.registerTexture("/assets/shark-128px.png");
+    this.registerTexture("/assets/brick-128px.png");
+    this.registerTexture("/assets/fish00-128px.png");
   };
-  override OnTexturesLoad = () => {
-    this.DaemonFactory.Create(Shark);
-    this.DaemonFactory.Create(Brick);
+  override onTexturesLoad = () => {
+    this.daemonFactory.Create(Shark);
+    this.daemonFactory.Create(Brick);
   };
 }
 export default Startup;

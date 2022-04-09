@@ -1,12 +1,12 @@
-import Daemon from "../base/contracts/daemon";
+import { Daemon } from "../playground";
 class Brick extends Daemon {
   Url = "/assets/brick-128px.png";
   constructor() {
     super();
   }
   OnCreate = () => {
-    this.ResolveSprite().width = 64;
-    this.ResolveSprite().height = 50;
+    this.resolveSprite().width = 64;
+    this.resolveSprite().height = 50;
   };
 }
 export default Brick;

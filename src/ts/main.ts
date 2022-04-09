@@ -1,5 +1,5 @@
 import Startup from "./startup";
 const main = (): void => {
-  new Startup().UsePlayground();
+  new Startup().usePlayground();
 };
 main();

@@ -13,7 +13,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-import Daemon from "../base/contracts/daemon";
+import Daemon from "../base/daemon";
 var Shark = /** @class */ (function (_super) {
     __extends(Shark, _super);
     function Shark() {

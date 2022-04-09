@@ -1,4 +1,4 @@
-import Daemon from "../base/contracts/daemon";
+import { Daemon } from "../playground";
 class Shark extends Daemon {
   Url = "/assets/shark-128px.png";
   vx: number = 0;
@@ -6,7 +6,7 @@ class Shark extends Daemon {
   tx: number = 0;
   ty: number = 0;
   OnTick = (delta: number) => {
-    const sprite = this.ResolveSprite();
+    const sprite = this.resolveSprite();
     const dx = this.tx - sprite.x;
     const dy = this.ty - sprite.y;
     if (Math.abs(dx) > 25) {
