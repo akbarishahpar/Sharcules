@@ -13,21 +13,19 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-import Playground from "./base";
-import Brick from "./daemons/brick";
+import Playground from "./playground";
 import Shark from "./daemons/shark";
 var Startup = /** @class */ (function (_super) {
     __extends(Startup, _super);
     function Startup() {
         var _this = _super.call(this) || this;
-        _this.ConfigureTextures = function () {
-            _this.RegisterTexture("/assets/shark-128px.png");
-            _this.RegisterTexture("/assets/brick-128px.png");
-            _this.RegisterTexture("/assets/fish00-128px.png");
+        _this.configureTextures = function () {
+            _this.registerTexture("/assets/shark-128px.png");
+            _this.registerTexture("/assets/brick-128px.png");
+            _this.registerTexture("/assets/fish00-128px.png");
         };
-        _this.OnTexturesLoad = function () {
-            _this.DaemonFactory.Create(Shark);
-            _this.DaemonFactory.Create(Brick);
+        _this.onTexturesLoad = function () {
+            _this.daemonFactory.Create(Shark);
         };
         return _this;
     }

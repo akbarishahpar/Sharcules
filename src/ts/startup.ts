@@ -12,7 +12,6 @@ class Startup extends Playground {
   };
   override onTexturesLoad = () => {
     this.daemonFactory.Create(Shark);
-    this.daemonFactory.Create(Brick);
   };
 }
 export default Startup;

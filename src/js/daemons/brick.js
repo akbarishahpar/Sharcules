@@ -13,15 +13,15 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-import Daemon from "../base/daemon";
+import { Daemon } from "../playground";
 var Brick = /** @class */ (function (_super) {
     __extends(Brick, _super);
     function Brick() {
         var _this = _super.call(this) || this;
-        _this.Url = "/assets/brick-128px.png";
-        _this.OnCreate = function () {
-            _this.ResolveSprite().width = 64;
-            _this.ResolveSprite().height = 50;
+        _this.url = "/assets/brick-128px.png";
+        _this.onCreate = function () {
+            _this.resolveSprite().width = 64;
+            _this.resolveSprite().height = 50;
         };
         return _this;
     }
