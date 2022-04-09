@@ -6,6 +6,7 @@ import Mouse from "./mouse";
 var Playground = /** @class */ (function () {
     function Playground() {
         var _this = this;
+        this.resolution = { width: 1024, height: 768 };
         this.app = new Application({ transparent: true });
         this.keybarod = new Keyboard();
         this.mouse = new Mouse(this.app.view);
@@ -32,8 +33,14 @@ var Playground = /** @class */ (function () {
             _this.configureTextures();
             Loader.shared.onProgress.add(_this.onTextureLoad);
             Loader.shared.load(_this.onTexturesLoad);
+            return _this;
         };
     }
+    Playground.prototype.useResolution = function (width, height) {
+        this.resolution.width = width;
+        this.resolution.height = height;
+        return this;
+    };
     return Playground;
 }());
 export default Playground;

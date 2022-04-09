@@ -1,4 +1,3 @@
-import { Sprite } from "pixi.js";
 var DaemonFactory = /** @class */ (function () {
     function DaemonFactory(playground) {
         this.playground = playground;
@@ -6,8 +5,8 @@ var DaemonFactory = /** @class */ (function () {
     DaemonFactory.prototype.Create = function (type) {
         var daemon = new type();
         daemon.daemonFactory = this;
-        daemon.sprite = new Sprite(this.playground.resolveTexture(daemon.url));
-        this.playground.registerSprite(daemon.sprite);
+        daemon.texture = this.playground.resolveTexture(daemon.url);
+        this.playground.registerSprite(daemon);
         if (daemon.onTick !== undefined)
             this.playground.app.ticker.add(daemon.onTick);
         if (daemon.onKeyDown !== undefined)

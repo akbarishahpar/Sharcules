@@ -6,10 +6,8 @@ class DaemonFactory {
   Create<Type extends Daemon>(type: { new (): Type }): Type {
     const daemon = new type();
     daemon.daemonFactory = this;
-    daemon.sprite = new Sprite(
-      this.playground.resolveTexture(<string>daemon.url)
-    );
-    this.playground.registerSprite(daemon.sprite);
+    daemon.texture = this.playground.resolveTexture(<string>daemon.url);
+    this.playground.registerSprite(daemon);
     if (daemon.onTick !== undefined)
       this.playground.app.ticker.add(<(delta: Number) => void>daemon.onTick);
     if (daemon.onKeyDown !== undefined)

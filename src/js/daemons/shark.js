@@ -26,15 +26,14 @@ var Shark = /** @class */ (function (_super) {
         _this.ty = 0;
         _this.blink = 0;
         _this.onTick = function (delta) {
-            var sprite = _this.resolveSprite();
-            var dx = _this.tx - sprite.x;
-            var dy = _this.ty - sprite.y;
+            var dx = _this.tx - _this.x;
+            var dy = _this.ty - _this.y;
             if (Math.abs(dx) > 25) {
                 _this.vx = dx / Math.max(Math.abs(dx), Math.abs(dy));
-                sprite.x += _this.vx * _this.vs * 5;
+                _this.x += _this.vx * _this.vs * 5;
             }
             if (Math.abs(dy) > 25) {
-                sprite.y += _this.vy * _this.vs * 5;
+                _this.y += _this.vy * _this.vs * 5;
                 _this.vy = dy / Math.max(Math.abs(dx), Math.abs(dy));
             }
         };
@@ -42,10 +41,10 @@ var Shark = /** @class */ (function (_super) {
             setInterval(function () {
                 if (_this.blink > 0) {
                     _this.vs = 2;
-                    if (_this.resolveSprite().alpha == 1)
-                        _this.resolveSprite().alpha = 0.5;
+                    if (_this.alpha == 1)
+                        _this.alpha = 0.5;
                     else
-                        _this.resolveSprite().alpha = 1;
+                        _this.alpha = 1;
                     _this.blink--;
                 }
                 else

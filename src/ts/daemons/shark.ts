@@ -8,15 +8,14 @@ class Shark extends Daemon {
   ty: number = 0;
   blink: number = 0;
   onTick = (delta: number) => {
-    const sprite = this.resolveSprite();
-    const dx = this.tx - sprite.x;
-    const dy = this.ty - sprite.y;
+    const dx = this.tx - this.x;
+    const dy = this.ty - this.y;
     if (Math.abs(dx) > 25) {
       this.vx = dx / Math.max(Math.abs(dx), Math.abs(dy));
-      sprite.x += this.vx * this.vs * 5;
+      this.x += this.vx * this.vs * 5;
     }
     if (Math.abs(dy) > 25) {
-      sprite.y += this.vy * this.vs * 5;
+      this.y += this.vy * this.vs * 5;
       this.vy = dy / Math.max(Math.abs(dx), Math.abs(dy));
     }
   };
@@ -24,8 +23,8 @@ class Shark extends Daemon {
     setInterval(() => {
       if (this.blink > 0) {
         this.vs = 2;
-        if (this.resolveSprite().alpha == 1) this.resolveSprite().alpha = 0.5;
-        else this.resolveSprite().alpha = 1;
+        if (this.alpha == 1) this.alpha = 0.5;
+        else this.alpha = 1;
         this.blink--;
       } else this.vs = 1;
     }, 100);

@@ -5,8 +5,10 @@ class Brick extends Daemon {
     super();
   }
   onCreate = () => {
-    this.resolveSprite().width = 64;
-    this.resolveSprite().height = 50;
+    this.size = {
+      width: 64,
+      height: 50,
+    };
   };
 }
 export default Brick;

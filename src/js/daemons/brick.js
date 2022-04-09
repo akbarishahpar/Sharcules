@@ -20,8 +20,10 @@ var Brick = /** @class */ (function (_super) {
         var _this = _super.call(this) || this;
         _this.url = "/assets/brick-128px.png";
         _this.onCreate = function () {
-            _this.resolveSprite().width = 64;
-            _this.resolveSprite().height = 50;
+            _this.size = {
+                width: 64,
+                height: 50,
+            };
         };
         return _this;
     }
