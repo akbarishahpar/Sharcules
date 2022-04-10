@@ -1,23 +1,21 @@
-var Keyboard = /** @class */ (function () {
-    function Keyboard() {
-        var _this = this;
+class Keyboard {
+    constructor() {
         this.onKeyDownHandlers = [];
         this.onKeyUpHandlers = [];
-        window.addEventListener("keydown", function (e) { return _this.onKeyDown(e); }, false);
-        window.addEventListener("keyup", function (e) { return _this.onKeyUp(e); }, false);
+        window.addEventListener("keydown", (e) => this.onKeyDown(e), false);
+        window.addEventListener("keyup", (e) => this.onKeyUp(e), false);
     }
-    Keyboard.prototype.subscribe = function (event, handler) {
+    subscribe(event, handler) {
         if (event === "keydown")
             this.onKeyDownHandlers.push(handler);
         if (event === "keyup")
             this.onKeyUpHandlers.push(handler);
-    };
-    Keyboard.prototype.onKeyDown = function (e) {
-        this.onKeyDownHandlers.forEach(function (handler) { return handler(e); });
-    };
-    Keyboard.prototype.onKeyUp = function (e) {
-        this.onKeyUpHandlers.forEach(function (handler) { return handler(e); });
-    };
-    return Keyboard;
-}());
+    }
+    onKeyDown(e) {
+        this.onKeyDownHandlers.forEach((handler) => handler(e));
+    }
+    onKeyUp(e) {
+        this.onKeyUpHandlers.forEach((handler) => handler(e));
+    }
+}
 export default Keyboard;

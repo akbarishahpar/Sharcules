@@ -1,57 +1,61 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
+var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+};
+var _Daemon_daemonFactory, _Daemon_playground, _Daemon_size, _Daemon_coordinates;
 import { Sprite } from "pixi.js";
-var Daemon = /** @class */ (function (_super) {
-    __extends(Daemon, _super);
-    function Daemon() {
-        var _this = _super.call(this) || this;
-        _this._size = { width: 0, height: 0 };
-        _this._coordinates = { x: 0, y: 0 };
-        return _this;
+class Daemon extends Sprite {
+    constructor() {
+        super();
+        _Daemon_daemonFactory.set(this, void 0);
+        _Daemon_playground.set(this, void 0);
+        _Daemon_size.set(this, { width: 0, height: 0 });
+        _Daemon_coordinates.set(this, { x: 0, y: 0 });
     }
-    Object.defineProperty(Daemon.prototype, "dameonFactory", {
-        get: function () {
-            return this._daemonFactory;
-        },
-        set: function (value) {
-            this._daemonFactory = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Daemon.prototype, "size", {
-        get: function () {
-            return this._size;
-        },
-        set: function (value) {
-            this._size = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Daemon.prototype, "coordinates", {
-        get: function () {
-            return this._coordinates;
-        },
-        set: function (value) {
-            this._coordinates = value;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    return Daemon;
-}(Sprite));
+    setTexture(url) {
+        this.texture = this.playground.getTexture(url);
+    }
+    get wf() {
+        return this.playground.currentSize.width / this.playground.idealSize.width;
+    }
+    get hf() {
+        return (this.playground.currentSize.height / this.playground.idealSize.height);
+    }
+    get daemonFactory() {
+        return __classPrivateFieldGet(this, _Daemon_daemonFactory, "f");
+    }
+    set daemonFactory(value) {
+        __classPrivateFieldSet(this, _Daemon_daemonFactory, value, "f");
+    }
+    get playground() {
+        return __classPrivateFieldGet(this, _Daemon_playground, "f");
+    }
+    set playground(value) {
+        __classPrivateFieldSet(this, _Daemon_playground, value, "f");
+    }
+    get size() {
+        return __classPrivateFieldGet(this, _Daemon_size, "f");
+    }
+    set size(value) {
+        __classPrivateFieldSet(this, _Daemon_size, value, "f");
+        this.width = this.size.width * this.wf;
+        this.height = this.size.height * this.hf;
+    }
+    get coordinates() {
+        return __classPrivateFieldGet(this, _Daemon_coordinates, "f");
+    }
+    set coordinates(value) {
+        __classPrivateFieldSet(this, _Daemon_coordinates, value, "f");
+        this.x = this.coordinates.x * this.wf;
+        this.y = this.coordinates.y * this.hf;
+    }
+}
+_Daemon_daemonFactory = new WeakMap(), _Daemon_playground = new WeakMap(), _Daemon_size = new WeakMap(), _Daemon_coordinates = new WeakMap();
 export default Daemon;

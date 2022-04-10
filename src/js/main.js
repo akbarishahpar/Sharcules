@@ -1,5 +1,5 @@
 import Startup from "./startup";
-var main = function () {
+const main = () => {
     new Startup().usePlayground();
 };
 main();

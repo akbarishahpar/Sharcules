@@ -1,4 +1,3 @@
-import { Sprite } from "pixi.js";
 import Daemon from "./daemon";
 import Playground from "../";
 class DaemonFactory {
@@ -6,8 +5,8 @@ class DaemonFactory {
   Create<Type extends Daemon>(type: { new (): Type }): Type {
     const daemon = new type();
     daemon.daemonFactory = this;
-    daemon.texture = this.playground.resolveTexture(<string>daemon.url);
-    this.playground.registerSprite(daemon);
+    daemon.playground = this.playground;
+    daemon.playground.addDaemon(daemon);
     if (daemon.onTick !== undefined)
       this.playground.app.ticker.add(<(delta: Number) => void>daemon.onTick);
     if (daemon.onKeyDown !== undefined)

@@ -1,66 +1,53 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 import { Daemon } from "../playground";
-var Shark = /** @class */ (function (_super) {
-    __extends(Shark, _super);
-    function Shark() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.url = "/assets/shark-128px.png";
-        _this.vs = 1;
-        _this.vx = 0;
-        _this.vy = 0;
-        _this.tx = 0;
-        _this.ty = 0;
-        _this.blink = 0;
-        _this.onTick = function (delta) {
-            var dx = _this.tx - _this.x;
-            var dy = _this.ty - _this.y;
+import * as textures from "../textures";
+class Shark extends Daemon {
+    constructor() {
+        super(...arguments);
+        this.url = "/assets/shark-128px.png";
+        this.vs = 1;
+        this.vx = 0;
+        this.vy = 0;
+        this.tx = 0;
+        this.ty = 0;
+        this.blink = 0;
+        this.onTick = (delta) => {
+            const dx = this.tx - this.x;
+            const dy = this.ty - this.y;
             if (Math.abs(dx) > 25) {
-                _this.vx = dx / Math.max(Math.abs(dx), Math.abs(dy));
-                _this.x += _this.vx * _this.vs * 5;
+                this.vx = dx / Math.max(Math.abs(dx), Math.abs(dy));
+                this.x += this.vx * this.vs * 5;
             }
             if (Math.abs(dy) > 25) {
-                _this.y += _this.vy * _this.vs * 5;
-                _this.vy = dy / Math.max(Math.abs(dx), Math.abs(dy));
+                this.y += this.vy * this.vs * 5;
+                this.vy = dy / Math.max(Math.abs(dx), Math.abs(dy));
             }
         };
-        _this.onCreate = function () {
-            setInterval(function () {
-                if (_this.blink > 0) {
-                    _this.vs = 2;
-                    if (_this.alpha == 1)
-                        _this.alpha = 0.5;
+        this.onCreate = () => {
+            this.setTexture(textures.shark);
+            setInterval(() => {
+                if (this.blink > 0) {
+                    this.vs = 0.5;
+                    this.setTexture(textures.fish);
+                    if (this.alpha == 1)
+                        this.alpha = 0.5;
                     else
-                        _this.alpha = 1;
-                    _this.blink--;
+                        this.alpha = 1;
+                    this.blink--;
                 }
-                else
-                    _this.vs = 1;
+                else {
+                    this.vs = 1;
+                    this.setTexture(textures.shark);
+                }
             }, 100);
         };
-        _this.onMouseMove = function (e) {
-            _this.tx = e.x;
-            _this.ty = e.y;
+        this.onMouseMove = (e) => {
+            this.tx = e.x;
+            this.ty = e.y;
         };
-        _this.onKeyDown = function (e) {
+        this.onKeyDown = (e) => {
             if (e.key === " ")
-                _this.blink = 10 * 2;
+                this.blink = 10 * 2;
         };
-        return _this;
     }
-    return Shark;
-}(Daemon));
+}
 export default Shark;

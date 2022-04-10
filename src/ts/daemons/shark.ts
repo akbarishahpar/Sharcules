@@ -1,4 +1,5 @@
 import { Daemon } from "../playground";
+import * as textures from "../textures";
 class Shark extends Daemon {
   url = "/assets/shark-128px.png";
   vs: number = 1;
@@ -20,13 +21,18 @@ class Shark extends Daemon {
     }
   };
   onCreate = () => {
+    this.setTexture(textures.shark);
     setInterval(() => {
       if (this.blink > 0) {
-        this.vs = 2;
+        this.vs = 0.5;
+        this.setTexture(textures.fish);
         if (this.alpha == 1) this.alpha = 0.5;
         else this.alpha = 1;
         this.blink--;
-      } else this.vs = 1;
+      } else {
+        this.vs = 1;
+        this.setTexture(textures.shark);
+      }
     }, 100);
   };
   onMouseMove = (e: MouseEvent): void => {

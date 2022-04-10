@@ -1,10 +1,11 @@
 import { Daemon } from "../playground";
+import * as textures from "../textures";
 class Brick extends Daemon {
-  url = "/assets/brick-128px.png";
   constructor() {
     super();
   }
-  onCreate = () => {
+  onCreate = (): void => {
+    this.setTexture(textures.brick);
     this.size = {
       width: 64,
       height: 50,

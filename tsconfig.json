@@ -2,7 +2,7 @@
   "compilerOptions": {
     "outDir": "./src/js",
     "rootDir": "./src/ts",
-    "target": "es5",
+    "target": "es6",
     "module": "ES2020",
     "strict": true,
     "esModuleInterop": true,

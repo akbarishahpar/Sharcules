@@ -1,12 +1,12 @@
-var DaemonFactory = /** @class */ (function () {
-    function DaemonFactory(playground) {
+class DaemonFactory {
+    constructor(playground) {
         this.playground = playground;
     }
-    DaemonFactory.prototype.Create = function (type) {
-        var daemon = new type();
+    Create(type) {
+        const daemon = new type();
         daemon.daemonFactory = this;
-        daemon.texture = this.playground.resolveTexture(daemon.url);
-        this.playground.registerSprite(daemon);
+        daemon.playground = this.playground;
+        daemon.playground.addDaemon(daemon);
         if (daemon.onTick !== undefined)
             this.playground.app.ticker.add(daemon.onTick);
         if (daemon.onKeyDown !== undefined)
@@ -20,7 +20,6 @@ var DaemonFactory = /** @class */ (function () {
         if (daemon.onCreate !== undefined)
             daemon.onCreate();
         return daemon;
-    };
-    return DaemonFactory;
-}());
+    }
+}
 export default DaemonFactory;
