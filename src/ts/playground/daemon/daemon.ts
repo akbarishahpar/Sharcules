@@ -50,18 +50,31 @@ abstract class Daemon extends Sprite {
   }
   set size(value: { width: number; height: number }) {
     this.#size = value;
-    this.width = this.size.width * this.wf;
-    this.height = this.size.height * this.hf;
   }
 
-  #coordinates: { x: number; y: number } = { x: 0, y: 0 };
-  get coordinates(): { x: number; y: number } {
+  #coordinates: { left: number; top: number } = { left: 0, top: 0 };
+  get coordinates(): { left: number; top: number } {
     return this.#coordinates;
   }
-  set coordinates(value: { x: number; y: number }) {
+  set coordinates(value: { left: number; top: number }) {
     this.#coordinates = value;
-    this.x = this.coordinates.x * this.wf;
-    this.y = this.coordinates.y * this.hf;
+  }
+  get left(): number {
+    return this.#coordinates.left;
+  }
+  set left(value: number) {
+    this.#coordinates.left = value;
+  }
+  get top(): number {
+    return this.#coordinates.top;
+  }
+  set top(value: number) {
+    this.#coordinates.top = value;
+  }
+
+  applyCoordinats(): void {
+    this.x = this.left - this.playground.left;
+    this.y = this.top - this.playground.top;
   }
 }
 export default Daemon;

@@ -10,19 +10,24 @@ class Shark extends Daemon {
         this.tx = 0;
         this.ty = 0;
         this.blink = 0;
-        this.onTick = (delta) => {
-            const dx = this.tx - this.x;
-            const dy = this.ty - this.y;
-            if (Math.abs(dx) > 25) {
-                this.vx = dx / Math.max(Math.abs(dx), Math.abs(dy));
-                this.x += this.vx * this.vs * 5;
-            }
-            if (Math.abs(dy) > 25) {
-                this.y += this.vy * this.vs * 5;
-                this.vy = dy / Math.max(Math.abs(dx), Math.abs(dy));
-            }
-        };
+        // onTick = (delta: number) => {
+        //   const dx = this.tx - this.x;
+        //   const dy = this.ty - this.y;
+        //   if (Math.abs(dx) > 25) {
+        //     this.vx = dx / Math.max(Math.abs(dx), Math.abs(dy));
+        //     this.x += this.vx * this.vs * 5;
+        //   }
+        //   if (Math.abs(dy) > 25) {
+        //     this.y += this.vy * this.vs * 5;
+        //     this.vy = dy / Math.max(Math.abs(dx), Math.abs(dy));
+        //   }
+        // };
         this.onCreate = () => {
+            this.coordinates = {
+                left: 960,
+                top: 450,
+            };
+            this.applyCoordinats();
             this.setTexture(textures.shark);
             setInterval(() => {
                 if (this.blink > 0) {
@@ -43,6 +48,11 @@ class Shark extends Daemon {
         this.onMouseMove = (e) => {
             this.tx = e.x;
             this.ty = e.y;
+            this.playground.coordinates = {
+                top: e.y,
+                left: e.x,
+            };
+            this.playground.applyCoordinates();
         };
         this.onKeyDown = (e) => {
             if (e.key === " ")

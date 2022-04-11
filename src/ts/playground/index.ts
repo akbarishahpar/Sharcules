@@ -1,12 +1,6 @@
 export { default as Daemon, DaemonFactory } from "./daemon";
-import {
-  Application,
-  Loader,
-  LoaderResource,
-  Sprite,
-  Texture,
-  Point,
-} from "pixi.js";
+import { Application, Loader, LoaderResource, Sprite, Texture } from "pixi.js";
+import Daemon from "./daemon";
 import DaemonFactory from "./daemon/daemonFactory";
 import Keyboard from "./keyboard";
 import Mouse from "./mouse";
@@ -30,18 +24,33 @@ abstract class Playground {
       height: this.app.view.height,
     };
   }
-  #camera: { x: number; y: number } = { x: 0, y: 0 };
-  get camera(): { x: number; y: number } {
-    return this.#camera;
+
+  #coordinates: { left: number; top: number } = { left: 0, top: 0 };
+  get coordinates(): { left: number; top: number } {
+    return this.#coordinates;
   }
-  set camera(value: { x: number; y: number }) {
-    this.#camera = value;
+  set coordinates(value: { left: number; top: number }) {
+    this.#coordinates = value;
   }
-  set cameraX(value: number) {
-    this.#camera.x = value;
+  get left(): number {
+    return this.#coordinates.left;
   }
-  set cameraY(value: number) {
-    this.#camera.y = value;
+  set left(value: number) {
+    this.#coordinates.left = value;
+  }
+  get top(): number {
+    return this.#coordinates.top;
+  }
+  set top(value: number) {
+    this.#coordinates.top = value;
+  }
+  applyCoordinates(): void {
+    this.app.stage.children.forEach((child) => {
+      const daemon = child as Daemon;
+      if (daemon) {
+        daemon.applyCoordinats();
+      }
+    });
   }
   onTextureLoad(loader: Loader, resource: LoaderResource): void {}
   onTexturesLoad(): void {}

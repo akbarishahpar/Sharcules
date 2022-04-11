@@ -9,9 +9,9 @@ var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var _Playground_idealSize, _Playground_camera;
+var _Playground_idealSize, _Playground_coordinates;
 export { default as Daemon, DaemonFactory } from "./daemon";
-import { Application, Loader, } from "pixi.js";
+import { Application, Loader } from "pixi.js";
 import DaemonFactory from "./daemon/daemonFactory";
 import Keyboard from "./keyboard";
 import Mouse from "./mouse";
@@ -22,7 +22,7 @@ class Playground {
         this.mouse = new Mouse(this.app.view);
         this.daemonFactory = new DaemonFactory(this);
         _Playground_idealSize.set(this, { width: 1024, height: 768 });
-        _Playground_camera.set(this, { x: 0, y: 0 });
+        _Playground_coordinates.set(this, { left: 0, top: 0 });
         this.getTexture = (url) => {
             return Loader.shared.resources[url].texture;
         };
@@ -58,17 +58,31 @@ class Playground {
             height: this.app.view.height,
         };
     }
-    get camera() {
-        return __classPrivateFieldGet(this, _Playground_camera, "f");
+    get coordinates() {
+        return __classPrivateFieldGet(this, _Playground_coordinates, "f");
     }
-    set camera(value) {
-        __classPrivateFieldSet(this, _Playground_camera, value, "f");
+    set coordinates(value) {
+        __classPrivateFieldSet(this, _Playground_coordinates, value, "f");
     }
-    set cameraX(value) {
-        __classPrivateFieldGet(this, _Playground_camera, "f").x = value;
+    get left() {
+        return __classPrivateFieldGet(this, _Playground_coordinates, "f").left;
     }
-    set cameraY(value) {
-        __classPrivateFieldGet(this, _Playground_camera, "f").y = value;
+    set left(value) {
+        __classPrivateFieldGet(this, _Playground_coordinates, "f").left = value;
+    }
+    get top() {
+        return __classPrivateFieldGet(this, _Playground_coordinates, "f").top;
+    }
+    set top(value) {
+        __classPrivateFieldGet(this, _Playground_coordinates, "f").top = value;
+    }
+    applyCoordinates() {
+        this.app.stage.children.forEach((child) => {
+            const daemon = child;
+            if (daemon) {
+                daemon.applyCoordinats();
+            }
+        });
     }
     onTextureLoad(loader, resource) { }
     onTexturesLoad() { }
@@ -79,5 +93,5 @@ class Playground {
         return this;
     }
 }
-_Playground_idealSize = new WeakMap(), _Playground_camera = new WeakMap();
+_Playground_idealSize = new WeakMap(), _Playground_coordinates = new WeakMap();
 export default Playground;

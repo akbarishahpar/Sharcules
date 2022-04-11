@@ -17,7 +17,7 @@ class Daemon extends Sprite {
         _Daemon_daemonFactory.set(this, void 0);
         _Daemon_playground.set(this, void 0);
         _Daemon_size.set(this, { width: 0, height: 0 });
-        _Daemon_coordinates.set(this, { x: 0, y: 0 });
+        _Daemon_coordinates.set(this, { left: 0, top: 0 });
     }
     setTexture(url) {
         this.texture = this.playground.getTexture(url);
@@ -45,16 +45,28 @@ class Daemon extends Sprite {
     }
     set size(value) {
         __classPrivateFieldSet(this, _Daemon_size, value, "f");
-        this.width = this.size.width * this.wf;
-        this.height = this.size.height * this.hf;
     }
     get coordinates() {
         return __classPrivateFieldGet(this, _Daemon_coordinates, "f");
     }
     set coordinates(value) {
         __classPrivateFieldSet(this, _Daemon_coordinates, value, "f");
-        this.x = this.coordinates.x * this.wf;
-        this.y = this.coordinates.y * this.hf;
+    }
+    get left() {
+        return __classPrivateFieldGet(this, _Daemon_coordinates, "f").left;
+    }
+    set left(value) {
+        __classPrivateFieldGet(this, _Daemon_coordinates, "f").left = value;
+    }
+    get top() {
+        return __classPrivateFieldGet(this, _Daemon_coordinates, "f").top;
+    }
+    set top(value) {
+        __classPrivateFieldGet(this, _Daemon_coordinates, "f").top = value;
+    }
+    applyCoordinats() {
+        this.x = this.left - this.playground.left;
+        this.y = this.top - this.playground.top;
     }
 }
 _Daemon_daemonFactory = new WeakMap(), _Daemon_playground = new WeakMap(), _Daemon_size = new WeakMap(), _Daemon_coordinates = new WeakMap();
