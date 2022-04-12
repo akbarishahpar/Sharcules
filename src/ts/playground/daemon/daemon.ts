@@ -18,16 +18,6 @@ abstract class Daemon extends Sprite {
     this.texture = this.playground.getTexture(url);
   }
 
-  get wf() {
-    return this.playground.currentSize.width / this.playground.idealSize.width;
-  }
-
-  get hf() {
-    return (
-      this.playground.currentSize.height / this.playground.idealSize.height
-    );
-  }
-
   #daemonFactory: DaemonFactory | undefined;
   get daemonFactory(): DaemonFactory {
     return <DaemonFactory>this.#daemonFactory;
@@ -50,6 +40,7 @@ abstract class Daemon extends Sprite {
   }
   set size(value: { width: number; height: number }) {
     this.#size = value;
+    this.applySize();
   }
 
   #coordinates: { left: number; top: number } = { left: 0, top: 0 };
@@ -58,23 +49,35 @@ abstract class Daemon extends Sprite {
   }
   set coordinates(value: { left: number; top: number }) {
     this.#coordinates = value;
+    this.applyCoordinates();
   }
   get left(): number {
     return this.#coordinates.left;
   }
   set left(value: number) {
     this.#coordinates.left = value;
+    this.applyCoordinates();
   }
   get top(): number {
     return this.#coordinates.top;
   }
   set top(value: number) {
     this.#coordinates.top = value;
+    this.applyCoordinates();
   }
-
-  applyCoordinats(): void {
-    this.x = this.left - this.playground.left;
-    this.y = this.top - this.playground.top;
+  applyCoordinates(): void {
+    const scale = this.playground.scale();
+    this.x = (this.left - this.playground.left) * scale.width;
+    this.y = (this.top - this.playground.top) * scale.height;
+  }
+  applySize(): void {
+    const scale = this.playground.scale();
+    this.width = scale.max * this.size.width;
+    this.height = scale.max * this.size.height;
+  }
+  applyScale(): void {
+    this.applyCoordinates();
+    this.applySize();
   }
 }
 export default Daemon;

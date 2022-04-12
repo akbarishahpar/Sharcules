@@ -23,12 +23,15 @@ class Shark extends Daemon {
         //   }
         // };
         this.onCreate = () => {
+            this.setTexture(textures.shark);
             this.coordinates = {
                 left: 960,
                 top: 450,
             };
-            this.applyCoordinats();
-            this.setTexture(textures.shark);
+            this.size = {
+                width: 128,
+                height: 72,
+            };
             setInterval(() => {
                 if (this.blink > 0) {
                     this.vs = 0.5;
@@ -48,11 +51,6 @@ class Shark extends Daemon {
         this.onMouseMove = (e) => {
             this.tx = e.x;
             this.ty = e.y;
-            this.playground.coordinates = {
-                top: e.y,
-                left: e.x,
-            };
-            this.playground.applyCoordinates();
         };
         this.onKeyDown = (e) => {
             if (e.key === " ")

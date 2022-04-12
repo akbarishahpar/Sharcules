@@ -22,12 +22,6 @@ class Daemon extends Sprite {
     setTexture(url) {
         this.texture = this.playground.getTexture(url);
     }
-    get wf() {
-        return this.playground.currentSize.width / this.playground.idealSize.width;
-    }
-    get hf() {
-        return (this.playground.currentSize.height / this.playground.idealSize.height);
-    }
     get daemonFactory() {
         return __classPrivateFieldGet(this, _Daemon_daemonFactory, "f");
     }
@@ -45,28 +39,42 @@ class Daemon extends Sprite {
     }
     set size(value) {
         __classPrivateFieldSet(this, _Daemon_size, value, "f");
+        this.applySize();
     }
     get coordinates() {
         return __classPrivateFieldGet(this, _Daemon_coordinates, "f");
     }
     set coordinates(value) {
         __classPrivateFieldSet(this, _Daemon_coordinates, value, "f");
+        this.applyCoordinates();
     }
     get left() {
         return __classPrivateFieldGet(this, _Daemon_coordinates, "f").left;
     }
     set left(value) {
         __classPrivateFieldGet(this, _Daemon_coordinates, "f").left = value;
+        this.applyCoordinates();
     }
     get top() {
         return __classPrivateFieldGet(this, _Daemon_coordinates, "f").top;
     }
     set top(value) {
         __classPrivateFieldGet(this, _Daemon_coordinates, "f").top = value;
+        this.applyCoordinates();
     }
-    applyCoordinats() {
-        this.x = this.left - this.playground.left;
-        this.y = this.top - this.playground.top;
+    applyCoordinates() {
+        const scale = this.playground.scale();
+        this.x = (this.left - this.playground.left) * scale.width;
+        this.y = (this.top - this.playground.top) * scale.height;
+    }
+    applySize() {
+        const scale = this.playground.scale();
+        this.width = scale.max * this.size.width;
+        this.height = scale.max * this.size.height;
+    }
+    applyScale() {
+        this.applyCoordinates();
+        this.applySize();
     }
 }
 _Daemon_daemonFactory = new WeakMap(), _Daemon_playground = new WeakMap(), _Daemon_size = new WeakMap(), _Daemon_coordinates = new WeakMap();
