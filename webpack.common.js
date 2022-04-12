@@ -4,7 +4,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const ImageminPlugin = require("imagemin-webpack-plugin").default;
 module.exports = {
   //context directory is src
-  context: path.join(__dirname, "src"),
+  context: path.join(__dirname, "public"),
 
   //entry file of the project,(relative to context)
   entry: ["./js/main.js"],
@@ -24,7 +24,12 @@ module.exports = {
   plugins: [
     //copy all src/assets to dist/assets
     new CopyWebpackPlugin(
-      { patterns: [{ from: "assets/", to: "assets/" }] },
+      {
+        patterns: [
+          { from: "assets/", to: "assets/" },
+          { from: "css/", to: "css/" },
+        ],
+      },
       {
         ignore: [],
         debug: "debug",
