@@ -2,7 +2,7 @@ import Daemon from "./daemon";
 import Playground from "../";
 class DaemonFactory {
   constructor(public playground: Playground) {}
-  Create<Type extends Daemon>(type: { new (): Type }): Type {
+  Create<Type extends Daemon>(type: { new (): Type }) {
     const daemon = new type();
     daemon.daemonFactory = this;
     daemon.playground = this.playground;

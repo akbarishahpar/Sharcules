@@ -30,21 +30,6 @@ class Playground {
         this.addTexture = (url) => {
             Loader.shared.add(url);
         };
-        this.addDaemon = (sprite) => this.app.stage.addChild(sprite);
-        this.configureTextures = () => { };
-        this.configureCanvas = () => {
-            document.body.appendChild(this.app.view);
-            this.app.renderer.view.style.position = "absolute";
-            this.app.renderer.view.style.display = "block";
-            this.app.renderer.autoDensity = true;
-        };
-        this.usePlayground = () => {
-            this.configureCanvas();
-            this.configureTextures();
-            Loader.shared.onProgress.add(this.onTextureLoad);
-            Loader.shared.load(this.onTexturesLoad);
-            return this;
-        };
         window.addEventListener("resize", () => {
             if (__classPrivateFieldGet(this, _Playground_resizeWatch, "f"))
                 clearTimeout(__classPrivateFieldGet(this, _Playground_resizeWatch, "f"));
@@ -120,9 +105,26 @@ class Playground {
     onTextureLoad(loader, resource) { }
     onTexturesLoad() { }
     onTick() { }
+    addDaemon(sprite) {
+        this.app.stage.addChild(sprite);
+    }
+    configureTextures() { }
+    configureCanvas() {
+        document.body.appendChild(this.app.view);
+        this.app.renderer.view.style.position = "absolute";
+        this.app.renderer.view.style.display = "block";
+        this.app.renderer.autoDensity = true;
+    }
     useSize(width, height) {
         __classPrivateFieldGet(this, _Playground_idealSize, "f").width = width;
         __classPrivateFieldGet(this, _Playground_idealSize, "f").height = height;
+        return this;
+    }
+    usePlayground() {
+        this.configureCanvas();
+        this.configureTextures();
+        Loader.shared.onProgress.add(this.onTextureLoad);
+        Loader.shared.load(this.onTexturesLoad);
         return this;
     }
 }
