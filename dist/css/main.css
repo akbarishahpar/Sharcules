@@ -11,5 +11,5 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('/assets/pool.jpg');
+    background-image: url('assets/pool.jpg');
 }
