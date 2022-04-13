@@ -1,5 +1,6 @@
 import { Sprite, Texture } from "pixi.js";
 import Playground from "..";
+import Edge from "../types/edge";
 import DaemonFactory from "./daemonFactory";
 abstract class Daemon extends Sprite {
   onTick?: (delta: number) => void;
@@ -78,6 +79,41 @@ abstract class Daemon extends Sprite {
   applyScale() {
     this.applyCoordinates();
     this.applySize();
+  }
+  get radius() {
+    return {
+      width: this.width / 2,
+      height: this.height / 2,
+    };
+  }
+  get center() {
+    return {
+      left: this.x + this.width / 2,
+      top: this.y + this.height / 2,
+    };
+  }
+  collides(daemon: Daemon | undefined) {
+    let axisX: Edge | undefined;
+    let axisY: Edge | undefined;
+    if (daemon === undefined) return { axisX, axisY };
+    if (
+      Math.abs(this.center.left - daemon.center.left) <=
+      this.radius.width + daemon.radius.width
+    ) {
+      if (this.center.left <= daemon.center.left) axisX = Edge.Right;
+      else axisX = Edge.Left;
+    }
+    if (
+      Math.abs(this.center.top - daemon.center.top) <=
+      this.radius.height + this.radius.height
+    ) {
+      if (this.center.top <= daemon.center.top) axisY = Edge.Top;
+      else axisY = Edge.Bottom;
+    }
+    return {
+      axisX,
+      axisY,
+    };
   }
 }
 export default Daemon;

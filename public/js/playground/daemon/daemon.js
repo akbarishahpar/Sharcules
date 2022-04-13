@@ -11,6 +11,7 @@ var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (
 };
 var _Daemon_daemonFactory, _Daemon_playground, _Daemon_size, _Daemon_coordinates;
 import { Sprite } from "pixi.js";
+import Edge from "../types/edge";
 class Daemon extends Sprite {
     constructor() {
         super();
@@ -75,6 +76,42 @@ class Daemon extends Sprite {
     applyScale() {
         this.applyCoordinates();
         this.applySize();
+    }
+    get radius() {
+        return {
+            width: this.width / 2,
+            height: this.height / 2,
+        };
+    }
+    get center() {
+        return {
+            left: this.x + this.width / 2,
+            top: this.y + this.height / 2,
+        };
+    }
+    collides(daemon) {
+        let axisX;
+        let axisY;
+        if (daemon === undefined)
+            return { axisX, axisY };
+        if (Math.abs(this.center.left - daemon.center.left) <=
+            this.radius.width + daemon.radius.width) {
+            if (this.center.left <= daemon.center.left)
+                axisX = Edge.Right;
+            else
+                axisX = Edge.Left;
+        }
+        if (Math.abs(this.center.top - daemon.center.top) <=
+            this.radius.height + this.radius.height) {
+            if (this.center.top <= daemon.center.top)
+                axisY = Edge.Top;
+            else
+                axisY = Edge.Bottom;
+        }
+        return {
+            axisX,
+            axisY,
+        };
     }
 }
 _Daemon_daemonFactory = new WeakMap(), _Daemon_playground = new WeakMap(), _Daemon_size = new WeakMap(), _Daemon_coordinates = new WeakMap();

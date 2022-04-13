@@ -17,7 +17,6 @@ abstract class Playground {
       this.#resizeWatch = setTimeout(() => this.applyScale(), 1);
     });
   }
-
   #idealSize = { width: 1920, height: 960 };
   get idealSize() {
     return this.#idealSize;
@@ -31,7 +30,6 @@ abstract class Playground {
       height: window.innerHeight,
     };
   }
-
   scale() {
     const widthScale = this.size.width / this.idealSize.width;
     const heightScale = this.size.height / this.idealSize.height;
@@ -43,7 +41,6 @@ abstract class Playground {
       max: scale,
     };
   }
-
   #coordinates = { left: 0, top: 0 };
   get coordinates() {
     return this.#coordinates;

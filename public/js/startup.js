@@ -1,5 +1,4 @@
 import Playground from "./playground";
-import Brick from "./daemons/brick";
 import Shark from "./daemons/shark";
 import * as textures from "./textures";
 class Startup extends Playground {
@@ -7,12 +6,13 @@ class Startup extends Playground {
         super();
         this.configureTextures = () => {
             this.addTexture(textures.shark);
-            this.addTexture(textures.brick);
+            this.addTexture(textures.shark_flipped);
+            this.addTexture(textures.bomb);
+            this.addTexture(textures.bomb_not_burning);
             this.addTexture(textures.fish);
         };
         this.onTexturesLoad = () => {
             this.daemonFactory.Create(Shark);
-            this.daemonFactory.Create(Brick);
         };
     }
 }

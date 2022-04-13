@@ -6,12 +6,12 @@ class Brick extends Daemon {
         this.onCreate = () => {
             this.setTexture(textures.brick);
             this.coordinates = {
-                left: 480,
+                left: 960 - 64,
                 top: 450,
             };
             this.size = {
-                width: 64,
-                height: 50,
+                width: 128,
+                height: 100,
             };
         };
     }
